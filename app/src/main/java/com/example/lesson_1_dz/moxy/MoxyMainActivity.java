@@ -1,23 +1,24 @@
-package com.example.lesson_1_dz.mosby;
+package com.example.lesson_1_dz.moxy;
 
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.lesson_1_dz.R;
-import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 
+public class MoxyMainActivity extends MvpAppCompatActivity
+        implements MoxyExampleView, View.OnClickListener {
 
-public class  MosbyMainActivity extends MvpActivity<MosbyExampleView, Presenter>
-        implements MosbyExampleView, View.OnClickListener {
+    @InjectPresenter
+    Presenter presenter;
 
     private Button btnCounter1;
     private Button btnCounter2;
     private Button btnCounter3;
-    //private Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +30,6 @@ public class  MosbyMainActivity extends MvpActivity<MosbyExampleView, Presenter>
         btnCounter1.setOnClickListener(this);
         btnCounter2.setOnClickListener(this);
         btnCounter3.setOnClickListener(this);
-
-    }
-
-    @NonNull
-    @Override
-    public Presenter createPresenter() {
-        return new Presenter();
     }
 
     @Override
@@ -49,7 +43,6 @@ public class  MosbyMainActivity extends MvpActivity<MosbyExampleView, Presenter>
             case 1:
                 btnCounter1.setText("Количество = " + value);
                 btnCounter1.setBackgroundColor(Color.WHITE);
-
                 break;
             case 2:
                 btnCounter2.setText("Количество = " + value);
@@ -57,7 +50,8 @@ public class  MosbyMainActivity extends MvpActivity<MosbyExampleView, Presenter>
                 break;
             case 3:
                 btnCounter3.setText("Количество = " + value);
-                btnCounter3.setBackgroundColor(Color.GREEN);
+                btnCounter3.setBackgroundColor(Color.BLUE);
+                btnCounter3.setTextColor(Color.WHITE);
                 break;
         }
     }

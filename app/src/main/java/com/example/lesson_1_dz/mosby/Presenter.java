@@ -26,7 +26,7 @@ public class Presenter extends MvpBasePresenter<MosbyExampleView> {
                     case R.id.btnCounter1:
                         newModelValue = calcNewModelValue(0);
                         mModel.setElementValueAtIndex(0, newModelValue);
-                        view.setButtonText(0, newModelValue);
+                        view.setButtonText(1, newModelValue);
                         break;
                     case R.id.btnCounter2:
                         newModelValue = calcNewModelValue(1);

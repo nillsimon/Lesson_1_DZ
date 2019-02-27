@@ -1,11 +1,9 @@
-package com.example.lesson_1_dz.main.mvp;
+package com.example.lesson_1_dz.moxy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Model {
-
     private List<Integer> mList;
 
     public Model() {
