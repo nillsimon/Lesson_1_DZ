@@ -4,17 +4,27 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.Button;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.lesson_1_dz.R;
+
+import static com.example.lesson_1_dz.moxy.ActionType.ONE;
 
 public class MoxyMainActivity extends MvpAppCompatActivity
         implements MoxyExampleView, View.OnClickListener {
 
-    @InjectPresenter
+    @InjectPresenter(type = PresenterType.LOCAL)
     Presenter presenter;
+
+    @ProvidePresenter(type = PresenterType.LOCAL)
+    Presenter providePresenter(){
+        return new Presenter(new Model());
+    }
 
     private Button btnCounter1;
     private Button btnCounter2;
@@ -34,25 +44,42 @@ public class MoxyMainActivity extends MvpAppCompatActivity
 
     @Override
     public void onClick(View v) {
-        presenter.buttonClick(v.getId());
-    }
-
-    @Override
-    public void setButtonText(int btnIndex, int value) {
-        switch (btnIndex) {
-            case 1:
-                btnCounter1.setText("Количество = " + value);
+        switch (v.getId()) {
+            case R.id.btnCounter1: {
+                presenter.onAction(ActionType.ONE);
                 btnCounter1.setBackgroundColor(Color.WHITE);
                 break;
-            case 2:
-                btnCounter2.setText("Количество = " + value);
+            }
+            case R.id.btnCounter2: {
+                presenter.onAction(ActionType.TWO);
                 btnCounter2.setBackgroundColor(Color.YELLOW);
                 break;
-            case 3:
-                btnCounter3.setText("Количество = " + value);
+
+            }
+            case R.id.btnCounter3: {
+                presenter.onAction(ActionType.FREE);
                 btnCounter3.setBackgroundColor(Color.BLUE);
                 btnCounter3.setTextColor(Color.WHITE);
                 break;
+            }
+
         }
+    }
+
+    @Override
+    public void setOneButtonText(String value) {
+        btnCounter1.setText(value);
+    }
+
+    @Override
+    public void setTwoButtonText(String value) {
+        btnCounter2.setText(value);
+
+    }
+
+    @Override
+    public void setFreeButtonText(String value) {
+        btnCounter3.setText(value);
+
     }
 }

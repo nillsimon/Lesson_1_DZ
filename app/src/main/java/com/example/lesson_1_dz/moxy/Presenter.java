@@ -8,12 +8,15 @@ import com.example.lesson_1_dz.R;
 
 @InjectViewState
 public class Presenter extends MvpPresenter<MoxyExampleView> {
-    private Model mModel;
+    private IModel mModel;
+
+    Presenter(IModel model) {
+        this.mModel = model;
+    }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        mModel = new Model();
         Log.d("Dto", "first attach");
     }
 
@@ -28,24 +31,25 @@ public class Presenter extends MvpPresenter<MoxyExampleView> {
         return currentValue + 1;
     }
 
-    public void buttonClick(final int btnIndex) {
+    public void onAction(ActionType type){
         int newModelValue;
-        switch (btnIndex) {
-            case R.id.btnCounter1:
+        String viewValue = "Количество = ";
+        switch (type) {
+            case ONE:
                 newModelValue = calcNewModelValue(0);
                 mModel.setElementValueAtIndex(0, newModelValue);
-                getViewState().setButtonText(1, newModelValue);
+                getViewState().setOneButtonText(viewValue + newModelValue);
                 break;
-            case R.id.btnCounter2:
+            case TWO:
                 newModelValue = calcNewModelValue(1);
                 mModel.setElementValueAtIndex(1, newModelValue);
-                getViewState().setButtonText(2, newModelValue);
+                getViewState().setTwoButtonText(viewValue + newModelValue);
                 break;
-            case R.id.btnCounter3:
+            case FREE:
                 newModelValue = calcNewModelValue(2);
                 mModel.setElementValueAtIndex(2, newModelValue);
-                getViewState().setButtonText(3, newModelValue);
+                getViewState().setFreeButtonText(viewValue + newModelValue);
                 break;
-        }
     }
+}
 }
