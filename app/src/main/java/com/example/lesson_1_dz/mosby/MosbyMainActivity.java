@@ -1,5 +1,6 @@
 package com.example.lesson_1_dz.mosby;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,12 +48,16 @@ public class  MosbyMainActivity extends MvpActivity<MosbyExampleView, Presenter>
         switch (btnIndex) {
             case 1:
                 btnCounter1.setText("Количество = " + value);
+                btnCounter1.setBackgroundColor(Color.WHITE);
+
                 break;
             case 2:
                 btnCounter2.setText("Количество = " + value);
+                btnCounter2.setBackgroundColor(Color.YELLOW);
                 break;
             case 3:
                 btnCounter3.setText("Количество = " + value);
+                btnCounter3.setBackgroundColor(Color.GREEN);
                 break;
         }
     }
